@@ -1,16 +1,25 @@
+import Form from "components/Form/Form";
+import { AuthContext } from "context/AuthContext";
+import { useContext, useState } from "react";
+import ContextForm from "./ContextForm/ContextForm";
+import UserCabinet from "./UserCabinet/UserCabinet";
+
 export const App = () => {
+  const {isLoggedInContext} = useContext(AuthContext);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <>
+
+ <div>
+  {!isLoggedIn && <Form setIsLoggedIn={setIsLoggedIn}/>}
+  {isLoggedIn && <UserCabinet/>}
+ </div>
+
+ <div>
+  {!isLoggedInContext && <ContextForm/>}
+  {isLoggedInContext && <UserCabinet/>}
+ </div>
+ </>
   );
 };
